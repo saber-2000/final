@@ -63,3 +63,5 @@ class AuthViewModel extends GetxController {
     }
   }
 }
+
+
