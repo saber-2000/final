@@ -45,3 +45,5 @@ class AuthViewModel extends GetxController {
     print(userCredential.user);
   }
 }
+
+
