@@ -1,4 +1,5 @@
 import 'package:final_project/core/view_model/auth_view_model.dart';
+import 'package:final_project/view/widgets/CustomTextFormFieldPass.dart';
 import 'package:final_project/view/widgets/custom_buttom.dart';
 import 'package:final_project/view/widgets/custom_text.dart';
 import 'package:final_project/view/widgets/custom_text_form_field.dart';
@@ -59,22 +60,15 @@ class LoginView extends GetWidget<AuthViewModel> {
                 height: 30,
               ),
               CustomTextFormField(
-                  text: 'Email',
-                  hint: 'iamdavid@gmail.com',
-                  onSave: (value) {},
-                  validator: (value) {}),
+                text: 'Email',
+                hint: 'iamdavid@gmail.com',
+              ),
               SizedBox(
                 height: 40,
               ),
-              CustomTextFormField(
+              CustomTextFormFieldPass(
                 text: 'Password',
                 hint: '**********',
-                onSave: (value) {},
-                validator: (value) {
-                  if (value == null) {
-                    print('error');
-                  }
-                },
               ),
               SizedBox(
                 height: 20,
@@ -85,11 +79,22 @@ class LoginView extends GetWidget<AuthViewModel> {
                 alignment: Alignment.topRight,
               ),
               SizedBox(
-                height: 15,
+                height: 20,
               ),
-              CustomButton(
-                onPress: () {},
-                text: 'SIGN IN',
+              RaisedButton(
+                onPressed: () {
+                  _formKey.currentState!.save();
+                  if (_formKey.currentState!.validate()) {
+                    controller.SignInWithEmailAndPassword();
+                  }
+                },
+                child: Text(
+                  "SIGN IN",
+                  style: TextStyle(
+                      backgroundColor: Colors.black,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               SizedBox(
                 height: 40,

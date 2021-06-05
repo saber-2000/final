@@ -12,22 +12,16 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     return GetMaterialApp(
-
-    debugShowCheckedModeBanner: false,
-    initialBinding: Binding(),
-
-    title: 'Final project',
+      debugShowCheckedModeBanner: false,
+      initialBinding: Binding(),
+      title: 'Final project',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home: LoginView(),
     );
   }
 }
-

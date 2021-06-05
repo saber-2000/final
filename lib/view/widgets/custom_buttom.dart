@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return RaisedButton(
       shape: new RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(10.0),
       ),
@@ -29,7 +29,7 @@ class CustomButton extends StatelessWidget {
       child: CustomText(
         alignment: Alignment.center,
         text: text,
-        color: Colors.white,
+        color: Colors.blue,
       ),
     );
   }

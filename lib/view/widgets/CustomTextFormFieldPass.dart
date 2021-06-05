@@ -1,16 +1,16 @@
 import 'package:final_project/core/view_model/auth_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 import 'custom_text.dart';
 
-class CustomTextFormField extends GetWidget<AuthViewModel> {
+class CustomTextFormFieldPass extends GetWidget<AuthViewModel> {
   final String text;
 
   final String hint;
 
-  CustomTextFormField({
+  CustomTextFormFieldPass({
     required this.text,
     required this.hint,
   });
@@ -27,11 +27,11 @@ class CustomTextFormField extends GetWidget<AuthViewModel> {
           ),
           TextFormField(
             onSaved: (value) {
-              controller.email = value!;
+              controller.password = value!;
             },
             validator: (value) {
               if (value == null) {
-                print("err");
+                print("erreur");
               }
             },
             decoration: InputDecoration(

@@ -1,4 +1,6 @@
+import 'package:final_project/view/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -11,10 +13,15 @@ class AuthViewModel extends GetxController {
   );
   FirebaseAuth _auth = FirebaseAuth.instance;
 
+  late String email, password, name;
+  Rxn<User> _user = Rxn<User>();
+  String? get user => _user.value!.email;
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    _user.bindStream(_auth.authStateChanges());
   }
 
   @override
@@ -43,5 +50,16 @@ class AuthViewModel extends GetxController {
     UserCredential userCredential =
         await _auth.signInWithCredential(Credential);
     print(userCredential.user);
+  }
+
+  void SignInWithEmailAndPassword() async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      Get.offAll(HomeView());
+    } catch (e) {
+      print("$e");
+      Get.snackbar("Error login account", "$e",
+          colorText: Colors.black, snackPosition: SnackPosition.BOTTOM);
+    }
   }
 }
