@@ -1,4 +1,6 @@
-import 'package:final_project/view/Home.dart';
+import 'package:final_project/core/view_model/service/firestore_user.dart';
+import 'package:final_project/model/user_model.dart';
+import 'package:final_project/view/HomeClient.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +15,7 @@ class AuthViewModel extends GetxController {
   );
   FirebaseAuth _auth = FirebaseAuth.instance;
 
+  
   late String email, password, name;
   Rxn<User> _user = Rxn<User>();
   String? get user => _user.value!.email;
@@ -47,21 +50,57 @@ class AuthViewModel extends GetxController {
       idToken: googleSignInAuthentication.idToken,
       accessToken: googleSignInAuthentication.accessToken,
     );
-    UserCredential userCredential =
-        await _auth.signInWithCredential(Credential);
-    print(userCredential.user);
+        await _auth.signInWithCredential(Credential).then((user)async{
+            
+         try{
+SaverGoogleUser(user);
+ Get.offAll(HomeClient());
+         }catch(e){
+             print("$e");
+      Get.snackbar("Error login account", "$e",
+          colorText: Colors.black, snackPosition: SnackPosition.BOTTOM);
+         }
+         
+          
+        });
+        
+       
+   
   }
 
   void SignInWithEmailAndPassword() async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Get.offAll(HomeView());
+      Get.offAll(HomeClient());
     } catch (e) {
       print("$e");
       Get.snackbar("Error login account", "$e",
           colorText: Colors.black, snackPosition: SnackPosition.BOTTOM);
     }
   }
+
+
+  void CreateAccountWithEmailAndPassword() async {
+    try {
+      await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user) async{
+        await FireStoreUser().addUserFireStore(UserModel(userId: user.user!.uid, name:name, pic: '', email: user.user!.email.toString()) );
+ 
+  Get.offAll(HomeClient());
+      });
+
+
+      
+    } catch (e) {
+      print("$e");
+      Get.snackbar("Error login account", "$e",
+          colorText: Colors.black, snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+ 
+  
+ void SaverGoogleUser(UserCredential user)async{
+   await FireStoreUser().addUserFireStore(UserModel(userId: user.user!.uid, name: user.user!.displayName.toString(), pic: user.user!.photoURL.toString(), email: user.user!.email.toString()) );
+ }
+
+
 }
-
-

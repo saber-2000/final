@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeView extends StatelessWidget {
+class HomeClient extends StatelessWidget {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
             Get.offAll(LoginView());
           },
           tooltip: 'LogOut',
-          child: Icon(Icons.logout),
+          child: Icon(Icons.home),
         ), // This trailing comma ma
       ),
     );

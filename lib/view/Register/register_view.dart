@@ -1,23 +1,22 @@
 import 'package:final_project/core/view_model/auth_view_model.dart';
+import 'package:final_project/view/widgets/CustomFormFieldName.dart';
 import 'package:final_project/view/widgets/CustomTextFormFieldPass.dart';
 import 'package:final_project/view/widgets/custom_text.dart';
 import 'package:final_project/view/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/button_view.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 
-import 'Menu.dart';
+import 'MenuR.dart';
 
-
-class LoginView extends GetWidget<AuthViewModel> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class RegisterScreen extends GetWidget<AuthViewModel> {
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[55],
-      body: Padding(
+       backgroundColor: Colors.lightBlue[55],
+      body:
+       Padding(
         padding: const EdgeInsets.only(
           top: 30,
         ),
@@ -25,13 +24,9 @@ class LoginView extends GetWidget<AuthViewModel> {
           key: _formKey,
           child: Column(
             children: [
-               SizedBox(
-                height: 20,
-              ),
-             
               Padding(
                 padding: const EdgeInsets.only(left: 120, right: 100),
-                child: Menu(),
+                child: MenuR(),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 500, right: 500, top: 60),
@@ -39,32 +34,27 @@ class LoginView extends GetWidget<AuthViewModel> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      text: "Welcome !",
+                      text: "SIGN UP  !",
                       fontSize: 30,
                     ),
                   ],
+                ),
+              ),
+                Padding(
+                padding: const EdgeInsets.only(left: 500, right: 500, top: 40),
+                child: CustomTextFormFieldName(
+                  text: 'NAME',
+                  hint: 'sadi',
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 500, right: 500, top: 60),
-                child: CustomText(
-                  text: 'Sign in to Continue',
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Padding(
                 padding: const EdgeInsets.only(left: 500, right: 500, top: 40),
                 child: CustomTextFormField(
                   text: 'Email',
                   hint: 'iamdavid@gmail.com',
-                  
                 ),
               ),
               SizedBox(
@@ -81,27 +71,16 @@ class LoginView extends GetWidget<AuthViewModel> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 500, right: 500, top: 40),
-                child: CustomText(
-                  text: 'Forgot Password?',
-                  fontSize: 14,
-                  alignment: Alignment.topRight,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
                 padding: const EdgeInsets.only(left: 500, right: 500, top: 20),
                 child: RaisedButton(
                   onPressed: () {
-                    _formKey.currentState!.save();
+                 _formKey.currentState!.save();
                     if (_formKey.currentState!.validate()) {
-                      controller.SignInWithEmailAndPassword();
+                      controller.CreateAccountWithEmailAndPassword();
                     }
                   },
                   child: Text(
-                    "SIGN IN",
+                    "SIGN UP",
                     style: TextStyle(
                         backgroundColor: Colors.black,
                         color: Colors.blue,
@@ -109,25 +88,6 @@ class LoginView extends GetWidget<AuthViewModel> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 500, right: 500, top: 40),
-                child: CustomText(
-                  text: '-OR-',
-                  alignment: Alignment.center,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 500, right: 500),
-                child: SignInButton(Buttons.Google, onPressed: () {
-                  controller.googleSignInMethod();
-                }),
-              ), 
             ],
           ),
         ),
@@ -135,4 +95,3 @@ class LoginView extends GetWidget<AuthViewModel> {
     );
   }
 }
-

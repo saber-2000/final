@@ -5,15 +5,14 @@ import 'package:get/get.dart';
 
 import 'custom_text.dart';
 
-class CustomTextFormField extends GetWidget<AuthViewModel> {
+class CustomTextFormFieldName extends GetWidget<AuthViewModel> {
   final String text;
 
   final String hint;
 
-  CustomTextFormField({
+  CustomTextFormFieldName({
     required this.text,
     required this.hint,
-    
   });
 
   @override
@@ -27,12 +26,12 @@ class CustomTextFormField extends GetWidget<AuthViewModel> {
             color: Colors.grey.shade900,
           ),
           TextFormField(
-            onSaved: (value){
-              controller.email=value!;
+            onSaved: (value) {
+              controller.name = value!;
             },
             validator: (value) {
               if (value == null) {
-                print("err");
+                print("errur");
               }
             },
             decoration: InputDecoration(
